@@ -7,6 +7,7 @@ let webpackConfig = require('./webpack.base.config.js');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 let config = require('../config');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 let preConfig = merge(webpackConfig, {
     devtool: '#source-map',
@@ -69,6 +70,10 @@ let preConfig = merge(webpackConfig, {
             chunksSortMode: 'dependency'
         }),
 
+        new CopyPlugin([{
+            from: path.resolve(__dirname, '../static'),
+            to: path.resolve(config.pre.assetsRoot, 'static')
+        }]),
 
         //这个插件压缩所有最终束的JavaScript代码
         new webpack.optimize.UglifyJsPlugin({

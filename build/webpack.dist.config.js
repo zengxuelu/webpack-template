@@ -13,6 +13,7 @@ let webpackConfig = require('./webpack.base.config.js');
 let OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin');
 let config = require('../config');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = Object.assign({}, webpackConfig, {
   devtool: 'source-map',
@@ -74,6 +75,11 @@ module.exports = Object.assign({}, webpackConfig, {
         // necessary to consistently work with multiple chunks via CommonsChunkPlugin
         chunksSortMode: 'dependency'
     }),
+
+    new CopyPlugin([{
+        from: path.resolve(__dirname, '../static'),
+        to: path.resolve(config.build.assetsRoot, 'static')
+    }]),
 
     //这个插件压缩所有最终束的JavaScript代码
     new webpack.optimize.UglifyJsPlugin({
