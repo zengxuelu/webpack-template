@@ -30,8 +30,8 @@ module.exports = {
   },
   devServer: {
     proxy: {
-      '/surveyapi/*': {
-        target: 'http://gapi.dev.ztgame.com/',
+      '/api/*': {
+        target: 'http://192.168.140.56:3000/',
         changeOrigin: 'true'
       }
     },
