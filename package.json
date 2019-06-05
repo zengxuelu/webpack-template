@@ -1,120 +1,33 @@
 {
-  "name": "ztgame_vue_webpack_tpl",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "webpack-template",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "test": "jest test/unit --coverage --no-cache -u",
-    "test-ui": "cd test/ui && chcp 65001 && cuke --run --format html --browser Chrome --overwrite",
-    "start": "node build/dev-server.js",
-    "pre": "node build/pre.js",
-    "build": "node build/build.js"
-  },
-  "repository": {},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "jest": {
-    "setupFiles": [
-      "./test/setup-jest.js"
-    ],
-    "globals": {
-      "ENV": "production"
-    },
-    "collectCoverageFrom": [
-      "src/store/*.js",
-      "!src/store/actions.js",
-      "src/views/site/**/**",
-      "src/components/EndModal/**",
-      "src/components/Question/**",
-      "src/components/Login/**",
-      "src/App.vue",
-      "test/setup-jest.js"
-    ],
-    "coverageThreshold": {
-      "global": {
-        "branches": 30,
-        "functions": 30,
-        "lines": 30,
-        "statements": 30
-      }
-    },
-    "coverageDirectory": "<rootDir>/test/unit/coverage",
-    "moduleNameMapper": {
-      "^~([\\s\\S]*)$": "<rootDir>/src$1",
-      "\\.(css|less|styl)$": "<rootDir>/test/__mocks__/styleMock.js",
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/test/__mocks__/fileMock.js"
-    },
-    "moduleFileExtensions": [
-      "js",
-      "vue"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest",
-      ".*\\.(vue)$": "<rootDir>/node_modules/jest-vue-preprocessor"
-    }
+    "start": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "pre": "vue-cli-service build --mode pre",
+    "lint": "vue-cli-service lint"
   },
   "dependencies": {
-    "animate.css": "^3.7.0",
-    "es6-promise": "^4.1.0",
-    "isomorphic-fetch": "^2.2.1",
-    "jquery": "^3.3.1",
-    "vue": "^2.2.6",
-    "vue-router": "^2.3.1",
-    "vuex": "^2.2.1",
-    "vuex-router-sync": "^4.1.2"
+    "animate.css": "^3.7.1",
+    "axios": "0.18.0",
+    "babel-polyfill": "^6.26.0",
+    "core-js": "^2.6.5",
+    "es6-promise": "^4.2.6",
+    "vue": "^2.6.10",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
   },
   "devDependencies": {
-    "autoprefixer": "^6.7.7",
-    "babel-core": "^6.24.0",
+    "@vue/cli-plugin-babel": "^3.8.0",
+    "@vue/cli-plugin-eslint": "^3.8.0",
+    "@vue/cli-service": "^3.8.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
-    "babel-loader": "^6.4.1",
-    "babel-polyfill": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-2": "^6.24.1",
-    "babel-runtime": "^6.23.0",
-    "browser-sync": "^2.18.8",
-    "clean-webpack-plugin": "^0.1.16",
-    "connect-history-api-fallback": "^1.6.0",
-    "copy-webpack-plugin": "^2.1.6",
-    "css-loader": "^0.28.0",
-    "eslint": "^5.12.0",
-    "eventsource-polyfill": "^0.9.6",
-    "express": "^4.16.4",
-    "extract-text-webpack-plugin": "^2.1.0",
-    "file-loader": "^0.11.0",
-    "globby": "^6.1.0",
-    "html-webpack-plugin": "^2.28.0",
-    "http-proxy-middleware": "^0.19.1",
-    "jest": "^23.6.0",
-    "jest-vue-preprocessor": "^1.4.0",
-    "less": "^3.9.0",
-    "less-loader": "^4.1.0",
-    "node-sass": "^4.11.0",
-    "optimize-css-assets-webpack-plugin": "^1.3.0",
-    "ora": "^3.0.0",
-    "raw-loader": "^0.5.1",
-    "sass-loader": "^6.0.0",
-    "shelljs": "^0.8.3",
-    "style-loader": "^0.16.1",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
     "stylus": "^0.54.5",
-    "stylus-loader": "^3.0.1",
-    "url-loader": "^0.5.8",
-    "vue-hot-reload-api": "^2.0.11",
-    "vue-html-loader": "^1.2.4",
-    "vue-loader": "^11.3.4",
-    "vue-style-loader": "^2.0.5",
-    "vue-template-compiler": "^2.2.6",
-    "vue-test-utils": "^1.0.0-beta.11",
-    "webpack": "^2.3.2",
-    "webpack-dev-middleware": "^1.10.0",
-    "webpack-dev-server": "^2.4.2",
-    "webpack-hot-middleware": "^2.18.0",
-    "webpack-merge": "^4.2.1"
-  },
-  "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "stylus-loader": "^3.0.2",
+    "vue-template-compiler": "^2.6.10"
   }
 }
