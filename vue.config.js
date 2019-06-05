@@ -16,7 +16,9 @@ module.exports = {
     },
   },
   chainWebpack: config => {
-    config.entry.app = ['babel-polyfill', './src/main.js'];
+    config
+        .entry('app')
+        .add('babel-polyfill');
     config
       .output
       .filename('js/[name].[hash:3].js')

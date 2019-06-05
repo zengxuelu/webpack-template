@@ -1,5 +1,5 @@
 import 'es6-promise/auto';
-import 'babel-polyfill';
+import '@babel/polyfill';
 import axios from 'axios';
 
 axios({
@@ -8,9 +8,11 @@ axios({
 })
 .then(res => {
     if (res.data.code == 1) {
-        alert("test");
+        console.log("test");
     }
 })
 .catch((err) => {
     console.log(err);
 });
+
+[1, 2, 3].forEach(x => console.log(x))
