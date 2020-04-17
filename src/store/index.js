@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import mutations from './mutations';
 import actions from './actions';
 import getters from './getters';
+import state from './state';
 // import index from './modules/index';
 // import welfare from './modules/welfare';
 // import footprint from './modules/footprint';
@@ -20,25 +21,7 @@ const debug = process.env.VUE_APP_ENV !== 'development';
  * 输出 store
  */
 export default new Vuex.Store({
-  state: {
-    modal: {
-      show: false,
-      type: ''
-    },
-    alert: {
-      show: false,
-      msg: ''
-    },
-    confirm: {
-      show: false
-    },
-    goToLogin: false,
-    showGuide: false,
-    userInfo: {},
-    userStatus: 0,
-    updateStyle: false,
-    loading: false
-  },
+  state,
   actions,
   mutations,
   getters,
