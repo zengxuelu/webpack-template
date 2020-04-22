@@ -1,9 +1,8 @@
 <template>
-    <div
-        @click="handleClose($event)"
-        :class="['cp-mask', show ? 'show' : '']"
-    >
-    </div>
+  <div
+    :class="['cp-mask', show ? 'show' : '']"
+    @click="handleClose($event)"
+  />
 </template>
 <style rel="stylesheet/stylus" lang="stylus" scoped>
     .cp-mask
@@ -23,26 +22,26 @@
             opacity 1
 </style>
 <script>
-  export default{
-    props: {
-        show : {
-            type : Boolean,
-            default : false
-        }
-    },
-    beforeMount(){
+export default {
+  props: {
+    show: {
+      type: Boolean,
+      default: false
+    }
+  },
+  beforeMount() {
 
-    },
-    methods: {
-        handleClose(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            this.$emit('close');
-        }
-    },
-    mounted(){
+  },
+  mounted() {
 
+  },
+  methods: {
+    handleClose(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      this.$emit('close');
     }
   }
+}
 </script>
 

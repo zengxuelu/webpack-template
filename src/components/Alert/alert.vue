@@ -1,11 +1,11 @@
 <template>
-  <div class="cp-alert" ref="alert" v-if="visible">
+  <div v-if="visible" ref="alert" class="cp-alert">
     <div class="box-mask">
-      <div class = "box-container">
+      <div class="box-container">
         <div class="box-header">
           <div class="box-title">{{ title }}</div>
         </div>
-        <div class = "box-content">{{text}}</div>
+        <div class="box-content">{{ text }}</div>
         <div class="box-bottom">
           <div class="bottom-item" @click="onClose">确认</div>
         </div>
@@ -15,34 +15,34 @@
 </template>
 
 <script>
-  export default{
-    name: 'alert',
-    data() {
-      return {
-        visible: false,
-        title:'',
-        text: '',
-        promiseStatus:null,
-      }
+export default {
+  name: 'Alert',
+  data() {
+    return {
+      visible: false,
+      title: '',
+      text: '',
+      promiseStatus: null
+    }
+  },
+  methods: {
+    confirm() {
+      let _this = this;
+      this.visible = true;
+      return new Promise(function(resolve, reject) {
+        _this.promiseStatus = { resolve, reject };
+      });
     },
-    methods:{
-      confirm() {
-        let _this = this;
-        this.visible = true;
-        return new Promise(function (resolve, reject) {
-          _this.promiseStatus = {resolve, reject};
-        });
-      },
-      onClose(){
-        this.$refs.alert.className += ' fadeOut';
-        let t = setTimeout(() => {
-          this.visible = false;
-          clearTimeout(t);
-          this.promiseStatus.resolve('ok');
-        }, 300);
-      }
+    onClose() {
+      this.$refs.alert.className += ' fadeOut';
+      let t = setTimeout(() => {
+        this.visible = false;
+        clearTimeout(t);
+        this.promiseStatus.resolve('ok');
+      }, 300);
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

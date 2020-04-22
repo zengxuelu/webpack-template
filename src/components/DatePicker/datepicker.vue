@@ -1,8 +1,8 @@
 <template>
-  <div class="cp-datepicker" v-if="show" @touchmove.prevent ref="datepicker">
+  <div v-if="show" ref="datepicker" class="cp-datepicker" @touchmove.prevent>
     <transition name="fade" mode="out-in">
       <div class="pickerBoxBg" @touchmove="_stopDef" @mousewheel="_stopDef">
-        <div class="pickerBox" v-show="show" @mousewheel="_stopDef">
+        <div v-show="show" class="pickerBox" @mousewheel="_stopDef">
           <div class="pickerBoxWrapper">
             <div class="pickerBoxTitle">
               <div class="title">选择时间</div>
@@ -16,87 +16,93 @@
               <div class="pickerBoxContentList">
                 <ul
                   :class="{'first_dragging': yearState.dragging}"
+                  :style="{'transform' : 'translate3d(0,' + yearState.translateY + 'px, 0)'}"
                   @touchstart="_onTouchStart('year', $event)"
                   @mousedown="_onTouchStart('year', $event)"
-                  :style="{'transform' : 'translate3d(0,' + yearState.translateY + 'px, 0)'}">
-                  <li></li>
-                  <li></li>
+                >
+                  <li />
+                  <li />
                   <li
-                    ref="list-box"
                     v-for="(item, index) in yearState.data"
+                    ref="list-box"
                     :key="index"
                     :class="{
-                          'current': item === yearState.selectedId,
-                          'node1':  Math.abs(index - yearState.index) == 1,
-                          'node2':  Math.abs(index - yearState.index) == 2,
-                          'node3':  Math.abs(index - yearState.index) >= 3
-                      }">
-                    {{item}}
+                      'current': item === yearState.selectedId,
+                      'node1': Math.abs(index - yearState.index) == 1,
+                      'node2': Math.abs(index - yearState.index) == 2,
+                      'node3': Math.abs(index - yearState.index) >= 3
+                    }"
+                  >
+                    {{ item }}
                   </li>
-                  <li></li>
-                  <li></li>
+                  <li />
+                  <li />
                 </ul>
-                <div class="ProvCitySelectedTop"></div>
-                <div class="ProvCitySelectedBottom"></div>
+                <div class="ProvCitySelectedTop" />
+                <div class="ProvCitySelectedBottom" />
               </div>
               <div class="pickerBoxContentList">
                 <ul
                   :class="{'second_dragging': monthState.dragging}"
+                  :style="{'transform' : 'translate3d(0,' + monthState.translateY + 'px, 0)'}"
                   @touchstart="_onTouchStart('month', $event)"
                   @mousedown="_onTouchStart('month', $event)"
-                  :style="{'transform' : 'translate3d(0,' + monthState.translateY + 'px, 0)'}">
-                  <li></li>
-                  <li></li>
+                >
+                  <li />
+                  <li />
                   <li
                     v-for="(item, index) in monthState.data"
                     :key="index"
                     :class="{
-                          'current': item === monthState.selectedId,
-                          'node1':  Math.abs(index - monthState.index) == 1,
-                          'node2':  Math.abs(index - monthState.index) == 2,
-                          'node3':  Math.abs(index - monthState.index) >= 3
-                  }">
-                    {{item}}
+                      'current': item === monthState.selectedId,
+                      'node1': Math.abs(index - monthState.index) == 1,
+                      'node2': Math.abs(index - monthState.index) == 2,
+                      'node3': Math.abs(index - monthState.index) >= 3
+                    }"
+                  >
+                    {{ item }}
                   </li>
-                  <li></li>
-                  <li></li>
+                  <li />
+                  <li />
                 </ul>
-                <div class="ProvCitySelectedTop"></div>
-                <div class="ProvCitySelectedBottom"></div>
+                <div class="ProvCitySelectedTop" />
+                <div class="ProvCitySelectedBottom" />
               </div>
               <div class="pickerBoxContentList">
                 <ul
                   ref:area-list
                   :class="{'third_dragging': dayState.dragging}"
+                  :style="{'transform' : 'translate3d(0,' + dayState.translateY + 'px, 0)'}"
                   @touchstart="_onTouchStart('day', $event)"
                   @mousedown="_onTouchStart('day', $event)"
-                  :style="{'transform' : 'translate3d(0,' + dayState.translateY + 'px, 0)'}">
-                  <li></li>
-                  <li></li>
+                >
+                  <li />
+                  <li />
                   <li
                     v-for="(item, index) in dayState.data"
                     :key="index"
                     :class="{
                       'current': item === dayState.selectedId,
-                      'node1':  Math.abs(index - dayState.index) == 1,
-                      'node2':  Math.abs(index - dayState.index) == 2,
-                      'node3':  Math.abs(index - dayState.index) >= 3
-                  }">
-                    {{item}}
+                      'node1': Math.abs(index - dayState.index) == 1,
+                      'node2': Math.abs(index - dayState.index) == 2,
+                      'node3': Math.abs(index - dayState.index) >= 3
+                    }"
+                  >
+                    {{ item }}
                   </li>
-                  <li></li>
-                  <li></li>
+                  <li />
+                  <li />
                 </ul>
-                <div class="ProvCitySelectedTop"></div>
-                <div class="ProvCitySelectedBottom"></div>
+                <div class="ProvCitySelectedTop" />
+                <div class="ProvCitySelectedBottom" />
               </div>
             </div>
 
           </div>
           <div class="pickerBoxConfirm" @click="submit">
-              {{confirm}}
+            {{ confirm }}
           </div>
-          <div class="pickerBoxCancle" @click="esc"></div>
+          <div class="pickerBoxCancle" @click="esc" />
         </div>
       </div>
     </transition>
@@ -106,7 +112,49 @@
 <script>
 
 export default {
-  data: function () {
+  props: {
+    initialDate: {
+      type: String,
+      default: null
+    },
+    'propsResult': {
+      type: Object,
+      default: null
+    },
+    'propsShow': {
+      type: Boolean,
+      default: false
+    },
+    'startYear': {
+      type: Number,
+      default: 2000
+    },
+    'startMonth': {
+      type: Number,
+      default: 1
+    },
+    'startDay': {
+      type: Number,
+      default: 1
+    },
+    'endYear': {
+      type: Number,
+      default: 2049
+    },
+    'endMonth': {
+      type: Number,
+      default: 12
+    },
+    'endDay': {
+      type: Number,
+      default: null
+    },
+    'confirm': {
+      type: String,
+      default: '确定'
+    }
+  },
+  data: function() {
     return {
       show: this.propsShow,
       result: this.propsResult,
@@ -143,7 +191,19 @@ export default {
       slideEls: null
     };
   },
-  mounted: function () {
+  watch: {
+    propsShow: function(newVal) {
+      this.show = newVal;
+    },
+    initialDate: function() {
+      this.initData();
+    },
+    show: function(newVal) {
+      this.$emit('setDialogVisible', newVal);
+      this.transToToday();
+    }
+  },
+  mounted: function() {
     this.initData();
     this._onTouchMove = this._onTouchMove.bind(this);
     this._onTouchEnd = this._onTouchEnd.bind(this);
@@ -268,7 +328,7 @@ export default {
     },
     initData() {
       let curDate = new Date();
-      if(!/^请选择/.test(this.initialDate)) {
+      if (!/^请选择/.test(this.initialDate)) {
         curDate = new Date(this.initialDate);
       }
       const yearState = this.yearState;
@@ -291,7 +351,7 @@ export default {
 
       this.$nextTick(() => {
         setTimeout(() => {
-          if(!_this.$refs['list-box'] || !_this.$refs['list-box'].length) return;
+          if (!_this.$refs['list-box'] || !_this.$refs['list-box'].length) return;
           const height = _this.$refs['list-box'][0].getBoundingClientRect().height;
           for (let i = 0; i < yearState.data.length; i++) {
             if (yearState.selectedId === yearState.data[i]) {
@@ -332,7 +392,7 @@ export default {
         clearTimeout(t);
       }, 300);
     },
-    esc () {
+    esc() {
       this.$refs.datepicker.className += ' fadeOut';
       let t = setTimeout(() => {
         this.show = false;
@@ -425,60 +485,6 @@ export default {
     },
     _stopDef(e) {
       e.preventDefault();
-    }
-  },
-  watch: {
-    propsShow: function (newVal) {
-      this.show = newVal;
-    },
-    initialDate: function () {
-      this.initData();
-    },
-    show: function (newVal) {
-      this.$emit('setDialogVisible', newVal);
-      this.transToToday();
-    }
-  },
-  props: {
-    initialDate: {
-      type: String,
-      default: null
-    },
-    'propsResult': {
-      type: Object,
-      default: null
-    },
-    'propsShow': {
-      type: Boolean,
-      default: false
-    },
-    'startYear': {
-      type: Number,
-      default: 2000
-    },
-    'startMonth': {
-      type: Number,
-      default: 1
-    },
-    'startDay': {
-      type: Number,
-      default: 1
-    },
-    'endYear': {
-      type: Number,
-      default: 2049
-    },
-    'endMonth': {
-      type: Number,
-      default: 12
-    },
-    'endDay': {
-      type: Number,
-      default: null
-    },
-    'confirm': {
-      type: String,
-      default: '确定'
     }
   }
 };

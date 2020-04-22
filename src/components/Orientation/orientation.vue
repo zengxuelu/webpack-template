@@ -1,9 +1,9 @@
 <template>
-  <div class="cp-orientation" v-if="isLandscape">
-      <div class="horizon-box">
-          <div class="horizon-pic"><i></i></div>
-          <span>为了更好的体验，请将手机竖过来哦~</span>
-      </div>
+  <div v-if="isLandscape" class="cp-orientation">
+    <div class="horizon-box">
+      <div class="horizon-pic"><i /></div>
+      <span>为了更好的体验，请将手机竖过来哦~</span>
+    </div>
   </div>
 </template>
 
@@ -15,7 +15,7 @@ export default {
       isLandscape: false
     }
   },
-  mounted () {
+  mounted() {
     this.checkOrientation();
     let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
     window.addEventListener(resizeEvt, this.checkOrientation, false);
@@ -26,21 +26,21 @@ export default {
   },
   methods: {
     onOrientationChange() {
-        let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
-        let _this = this;
-        window.addEventListener(resizeEvt, () => {
-            setTimeout(()=>{
-                _this.checkOrientation();
-            }, 300);
-        }, false);
+      let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
+      let _this = this;
+      window.addEventListener(resizeEvt, () => {
+        setTimeout(() => {
+          _this.checkOrientation();
+        }, 300);
+      }, false);
     },
     checkOrientation() {
-      let ww = window.innerWidth,
-          wh = window.innerHeight;
+      let ww = window.innerWidth;
+      let wh = window.innerHeight;
       if (ww > wh) {
-          this.isLandscape = true;
+        this.isLandscape = true;
       } else {
-          this.isLandscape = false;
+        this.isLandscape = false;
       }
     }
   }

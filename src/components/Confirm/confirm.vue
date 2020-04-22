@@ -1,11 +1,11 @@
 <template>
-  <div class="cp-confirm " ref="confirm" v-if="visible">
+  <div v-if="visible" ref="confirm" class="cp-confirm ">
     <div class="box-mask">
-      <div class = "box-container">
+      <div class="box-container">
         <div class="box-header">
           <div class="box-title">{{ title }}</div>
         </div>
-        <div class = "box-content">{{text}}</div>
+        <div class="box-content">{{ text }}</div>
         <div class="box-bottom">
           <div class="bottom-item" @click="handleAction('cancel')">
             取消
@@ -20,38 +20,38 @@
 </template>
 
 <script>
-  export default{
-    name: 'confirm',
-    data() {
-      return {
-        visible: false,
-        title:'',
-        text: '',
-        promiseStatus:null,
-      }
+export default {
+  name: 'Confirm',
+  data() {
+    return {
+      visible: false,
+      title: '',
+      text: '',
+      promiseStatus: null
+    }
+  },
+  methods: {
+    confirm() {
+      let _this = this;
+      this.visible = true;
+      return new Promise(function(resolve, reject) {
+        _this.promiseStatus = { resolve, reject };
+      });
     },
-    methods:{
-      confirm() {
-        let _this = this;
-        this.visible = true;
-        return new Promise(function (resolve, reject) {
-          _this.promiseStatus = {resolve, reject};
-        });
-      },
-      handleAction(action){
-        this.$refs.confirm.className += ' fadeOut';
-        let t = setTimeout(() => {
-          this.visible = false;
-          clearTimeout(t);
-          if(action == 'yes'){
-            this.promiseStatus && this.promiseStatus.resolve('ok');
-          }else{
-            this.promiseStatus && this.promiseStatus.reject('cancel');
-          }
-        }, 300);
-      }
+    handleAction(action) {
+      this.$refs.confirm.className += ' fadeOut';
+      let t = setTimeout(() => {
+        this.visible = false;
+        clearTimeout(t);
+        if (action === 'yes') {
+          this.promiseStatus && this.promiseStatus.resolve('ok');
+        } else {
+          this.promiseStatus && this.promiseStatus.reject('cancel');
+        }
+      }, 300);
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

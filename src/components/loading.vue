@@ -1,20 +1,21 @@
 <template>
   <div class="cp-loading">
     <div class="container">
-      <div class="ball"></div>
-      <div class="ball ball-1"></div>
+      <div class="ball" />
+      <div class="ball ball-1" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'loading',
-    props:{
-      loadingWord:{
-        type:String
-      }
+  name: 'Loading',
+  props: {
+    loadingWord: {
+      type: String,
+      default: ''
     }
+  }
 };
 </script>
 

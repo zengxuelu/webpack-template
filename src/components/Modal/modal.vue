@@ -1,7 +1,7 @@
 <template>
-    <div class="cp-modal">
-        <slot></slot>
-    </div>
+  <div class="cp-modal">
+    <slot />
+  </div>
 </template>
 <style rel="stylesheet/stylus" lang="stylus" scoped>
 @import '../../assets/stylus/minixs/_center.styl';
@@ -20,16 +20,16 @@
         background-color rgba(0, 0, 0, 0.8)
 </style>
 <script>
-  export default{
-    beforeMount(){
+export default {
+  beforeMount() {
 
-    },
-    methods: {
+  },
+  mounted() {
 
-    },
-    mounted(){
+  },
+  methods: {
 
-    }
   }
+}
 </script>
 

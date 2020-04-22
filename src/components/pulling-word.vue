@@ -1,17 +1,17 @@
 <template>
-	<div class="cp-loading-word">
-		<span class="iconfont icon-shangla">{{loadingWord}}</span>
-	</div>
+  <div class="cp-loading-word">
+    <span class="iconfont icon-shangla">{{ loadingWord }}</span>
+  </div>
 </template>
 
 <script>
 export default {
-    props:{
-      loadingWord: {
-        type: String,
-        default: ""
-      }
+  props: {
+    loadingWord: {
+      type: String,
+      default: ''
     }
+  }
 };
 </script>
 

@@ -13,7 +13,7 @@ let Confirm = (text, title = '提示', options) => {
 
   options = Object.assign({
     title: title,
-    text: text,
+    text: text
   }, options);
 
   let instance = new ConfirmBox({

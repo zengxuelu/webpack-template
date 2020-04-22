@@ -1,85 +1,85 @@
 <template>
-    <div class="cp-scroller" ref="wrapper">
-        <div ref="ulDom">
-            <slot></slot>
-            <div>
-                <PullingWord v-show="!inPullUp && dataList.length > 0" :loadingWord="beforePullUpWord"></PullingWord>
-                <div class="loadingContainer" v-if="inPullUp && !isEnd">
-                  <div class="loadEffect">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                  </div>
-                  <div>{{PullingUpWord}}</div>
-                </div>
-                <div class="loaded" v-if="isEnd">加载完毕，没有更多数据了~</div>
-            </div>
+  <div ref="wrapper" class="cp-scroller">
+    <div ref="ulDom">
+      <slot />
+      <div>
+        <PullingWord v-show="!inPullUp && dataList.length > 0" :loading-word="beforePullUpWord" />
+        <div v-if="inPullUp && !isEnd" class="loadingContainer">
+          <div class="loadEffect">
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+            <span />
+          </div>
+          <div>{{ PullingUpWord }}</div>
         </div>
+        <div v-if="isEnd" class="loaded">加载完毕，没有更多数据了~</div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script >
-  import PullingWord from './pulling-word'
-  const  PullingUpWord="正在拼命加载中...";
-  const  beforePullUpWord="上拉加载更多";
-  export default {
-    props: {
-      dataList: {
-        type: Array,
-        default: ()=>{
-          return [];
-        }
-      },
-      isEnd: {
-        type: Boolean,
-        default: () => {
-          return false;
-        }
-      },
+import PullingWord from './pulling-word'
+const PullingUpWord = '正在拼命加载中...';
+const beforePullUpWord = '上拉加载更多';
+export default {
+  components: {
+    PullingWord
+  },
+  props: {
+    dataList: {
+      type: Array,
+      default: () => {
+        return [];
+      }
     },
-    data() {
-        return {
-            scroll:null,
-            inPullUp:false,
-            beforePullUpWord,
-            PullingUpWord,
-            continuePullUp:true
-        }
-    },
+    isEnd: {
+      type: Boolean,
+      default: () => {
+        return false;
+      }
+    }
+  },
+  data() {
+    return {
+      scroll: null,
+      inPullUp: false,
+      beforePullUpWord,
+      PullingUpWord,
+      continuePullUp: true
+    }
+  },
 
-    mounted() {
-      this.$refs.wrapper.addEventListener('scroll', this.scrollBottomHandler);
-    },
-    beforeDestroy() {
-      this.$refs.wrapper.removeEventListener('scroll', this.scrollBottomHandler)
-    },
-    methods: {
-        scrollBottomHandler() {
-          window.requestAnimationFrame(() => {
-              var sh = this.$refs.wrapper.getBoundingClientRect().height,
-                  st = this.$refs.wrapper.scrollTop,
-                  mt = this.$refs.ulDom.scrollHeight;
-              // console.log(`st: ${st}, mt: ${mt}, sh+st: ${sh+st}`);
-              if (sh + st + 1 > mt) {
-                  // this.fetchData();
-                  this.$emit("onPullUp","当前状态：上拉加载");
-                  this.PullingUpWord = PullingUpWord;
-                  this.inPullUp = true;
-              } else {
-                  this.inPullUp = false;
-              }
-          });
+  mounted() {
+    this.$refs.wrapper.addEventListener('scroll', this.scrollBottomHandler);
+  },
+  beforeDestroy() {
+    this.$refs.wrapper.removeEventListener('scroll', this.scrollBottomHandler)
+  },
+  methods: {
+    scrollBottomHandler() {
+      window.requestAnimationFrame(() => {
+        var sh = this.$refs.wrapper.getBoundingClientRect().height;
+        var st = this.$refs.wrapper.scrollTop;
+        var mt = this.$refs.ulDom.scrollHeight;
+        // console.log(`st: ${st}, mt: ${mt}, sh+st: ${sh+st}`);
+        if (sh + st + 1 > mt) {
+          // this.fetchData();
+          this.$emit('onPullUp', '当前状态：上拉加载');
+          this.PullingUpWord = PullingUpWord;
+          this.inPullUp = true;
+        } else {
+          this.inPullUp = false;
         }
-    },
-    components: {
-        PullingWord
+      });
     }
   }
+}
 </script>
 
 <style lang="stylus" scoped>

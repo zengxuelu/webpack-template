@@ -1,7 +1,7 @@
 <template>
-    <div class="pg-index">
-        <div class="content content_home">
-            <!-- <div class="header">
+  <div class="pg-index">
+    <div class="content content_home">
+      <!-- <div class="header">
               <img src="./images/mHome/logo.png">
               <div class="main_title">
                 征途2手游
@@ -12,28 +12,28 @@
             </div>
             <div class="human fadeIn animated"></div>
             <div class="slogan zoomIn animated"></div> -->
-            <div class="date" @click="showStart = true">{{startDate}}</div>
-            <Scroller
-              class="scroll"
-              ref="scroll"
-              :dataList="filmList"
-              :is-end="loaded"
-              @onPullUp="pullUpHandle"
-            >
-              <div class="film-list" v-for="(v, i) in filmList" :key="i" tag="li">
-                  <div class="film-list__img">
-                      <img :src="v.image" alt="" />
-                  </div>
-                  <div class="film-list__detail">
-                      <p class="film-list__detail__title">{{v.title}}</p>
-                      <p class="film-list__detail__director">导演：{{v.director}}</p>
-                      <p class="film-list__detail__year">年份：{{v.year}}<span>{{v.stock}}</span></p>
-                      <p class="film-list__detail__type">类别：{{v.genres.join(" / ")}}<span></span></p>
-                      <p class="film-list__detail__rank">评分：<span>{{v.rating.average}}分</span></p>
-                  </div>
-              </div>
-            </Scroller>
-            <!-- <AutoScroll class="scroll">
+      <div class="date" @click="showStart = true">{{ startDate }}</div>
+      <Scroller
+        ref="scroll"
+        class="scroll"
+        :data-list="filmList"
+        :is-end="loaded"
+        @onPullUp="pullUpHandle"
+      >
+        <div v-for="(v, i) in filmList" :key="i" class="film-list" tag="li">
+          <div class="film-list__img">
+            <img :src="v.image" alt="">
+          </div>
+          <div class="film-list__detail">
+            <p class="film-list__detail__title">{{ v.title }}</p>
+            <p class="film-list__detail__director">导演：{{ v.director }}</p>
+            <p class="film-list__detail__year">年份：{{ v.year }}<span>{{ v.stock }}</span></p>
+            <p class="film-list__detail__type">类别：{{ v.genres.join(" / ") }}<span /></p>
+            <p class="film-list__detail__rank">评分：<span>{{ v.rating.average }}分</span></p>
+          </div>
+        </div>
+      </Scroller>
+      <!-- <AutoScroll class="scroll">
               <div class="film-list" v-for="(v, i) in filmList" :key="i" tag="li">
                   <div class="film-list__img">
                       <img :src="v.image" alt="" />
@@ -47,108 +47,108 @@
                   </div>
               </div>
             </AutoScroll> -->
-            <date-picker
-                :props-show="showStart"
-                v-on:setDialogVisible="(val) => showStart = val"
-                v-on:setDate="setStart"
-                :initialDate="startDate"
-            ></date-picker>
-        </div>
+      <date-picker
+        :props-show="showStart"
+        :initial-date="startDate"
+        @setDialogVisible="(val) => showStart = val"
+        @setDate="setStart"
+      />
     </div>
+  </div>
 </template>
 <script>
-  import store from '~/store/index';
-  import * as types from '~/store/mutation-type';
-  import { mapState } from 'vuex';
-  import { isAndroid } from '~/tools/utils'
-  import datePicker from '~/components/DatePicker/datepicker.vue';
-  import Scroller from '~/components/scroller.vue'
+import store from '~/store/index';
+import * as types from '~/store/mutation-type';
+import { mapState } from 'vuex';
+import { isAndroid } from '~/tools/utils'
+import datePicker from '~/components/DatePicker/datepicker.vue';
+import Scroller from '~/components/scroller.vue'
 //   import AutoScroll from '~/components/AutoScroll/autoscroll.vue'
 
-  export default {
-    components: {
-        Scroller,
-        datePicker,
-        // AutoScroll
-    },
-    computed: {
-        ...mapState({
-            goToLogin: state => state.goToLogin,
-        })
-    },
-    data () {
-        return {
-            callBackFn: '',
-            needToRequestUserInfo: true,
-            loaded: false,
-            filmList: [
-              {
-                image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
-                title: '风雪俏佳人',
-                stock: 1990,
-                genres: ['悬疑', '惊悚'],
-                rating: {average: 7.5},
-                director: '李安'
-              },
-              {
-                image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
-                title: '风雪俏佳人',
-                stock: 1991,
-                genres: ['悬疑', '惊悚'],
-                rating: {average: 7.5},
-                director: '李安'
-              },
-              {
-                image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
-                title: '风雪俏佳人',
-                stock: 1992,
-                genres: ['悬疑', '惊悚'],
-                rating: {average: 7.5},
-                director: '李安'
-              }
-            ],
-            cardList: [],
-            user_info: {},
-            index_data: {},
-            downloadUrl: `https://zt2m.ztgame.com/download/${isAndroid() ? 'android' : 'ios'}.html`,
-            showStart: false,
-            endYear: 2099,
-            startDate: '请选择开始日期',
+export default {
+  components: {
+    Scroller,
+    datePicker
+    // AutoScroll
+  },
+  data() {
+    return {
+      callBackFn: '',
+      needToRequestUserInfo: true,
+      loaded: false,
+      filmList: [
+        {
+          image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
+          title: '风雪俏佳人',
+          stock: 1990,
+          genres: ['悬疑', '惊悚'],
+          rating: { average: 7.5 },
+          director: '李安'
+        },
+        {
+          image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
+          title: '风雪俏佳人',
+          stock: 1991,
+          genres: ['悬疑', '惊悚'],
+          rating: { average: 7.5 },
+          director: '李安'
+        },
+        {
+          image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
+          title: '风雪俏佳人',
+          stock: 1992,
+          genres: ['悬疑', '惊悚'],
+          rating: { average: 7.5 },
+          director: '李安'
         }
-    },
-    mounted() {
-      store.commit(types.SHOW_LOADING, false);
-    },
-    methods: {
-      pullUpHandle(){
-        if(this.filmList.length > 5) {
-          this.loaded = true;
-        } else {
-          setTimeout(()=>{
-              this.filmList = this.filmList.concat([
-                {
-                  image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
-                  title: '风雪俏佳人',
-                  stock: this.filmList[this.filmList.length - 1].stock + 1,
-                  genres: ['悬疑', '惊悚'],
-                  rating: {average: 7.5}
-                },
-                {
-                  image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
-                  title: '风雪俏佳人',
-                  stock: this.filmList[this.filmList.length - 1].stock + 2,
-                  genres: ['悬疑', '惊悚'],
-                  rating: {average: 7.5}
-                }
-              ]);
-          }, 1000);
-        }
-      },
-      setStart(val) {
-          this.startDate = `${val.year}-${val.month}-${val.day}`;
+      ],
+      cardList: [],
+      user_info: {},
+      index_data: {},
+      downloadUrl: `https://zt2m.ztgame.com/download/${isAndroid() ? 'android' : 'ios'}.html`,
+      showStart: false,
+      endYear: 2099,
+      startDate: '请选择开始日期'
+    }
+  },
+  computed: {
+    ...mapState({
+      goToLogin: state => state.goToLogin
+    })
+  },
+  mounted() {
+    store.commit(types.SHOW_LOADING, false);
+  },
+  methods: {
+    pullUpHandle() {
+      if (this.filmList.length > 5) {
+        this.loaded = true;
+      } else {
+        setTimeout(() => {
+          this.filmList = this.filmList.concat([
+            {
+              image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
+              title: '风雪俏佳人',
+              stock: this.filmList[this.filmList.length - 1].stock + 1,
+              genres: ['悬疑', '惊悚'],
+              rating: { average: 7.5 }
+            },
+            {
+              image: 'http://portrait5.sinaimg.cn/1562541404/blog/180',
+              title: '风雪俏佳人',
+              stock: this.filmList[this.filmList.length - 1].stock + 2,
+              genres: ['悬疑', '惊悚'],
+              rating: { average: 7.5 }
+            }
+          ]);
+        }, 1000);
       }
+    },
+    setStart(val) {
+      this.startDate = `${val.year}-${val.month}-${val.day}`;
     }
   }
+}
 </script>
 <style rel="stylesheet/stylus" lang="stylus" scoped>
 @import '../../assets/stylus/minixs/_center.styl';
