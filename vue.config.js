@@ -8,12 +8,13 @@ const publicPathMap = {
 module.exports = {
   publicPath: publicPathMap[process.env.VUE_APP_ENV],
   outputDir: process.env.VUE_APP_ENV == 'pre' ? 'pre' : 'dist',
+  productionSourceMap: false,
   configureWebpack: {
     resolve: {
       alias: {
-        '~': path.join(__dirname, 'src'),
-      },
-    },
+        '~': path.join(__dirname, 'src')
+      }
+    }
   },
   chainWebpack: config => {
     config
@@ -33,6 +34,6 @@ module.exports = {
         target: 'http://192.168.140.56:3000/',
         changeOrigin: 'true'
       }
-    },
+    }
   }
 }
