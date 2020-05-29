@@ -1,26 +1,26 @@
 import * as types from './mutation-type';
 
 export default {
-  [types.SHOW_ALERT]: (state, {type, msg}) => {
+  [types.SHOW_ALERT]: (state, { type, msg }) => {
     state.alert = Object.assign({}, {
-        show: true,
-        type,
-        msg
-      });
+      show: true,
+      type,
+      msg
+    });
   },
   [types.HIDE_ALERT]: (state) => {
     state.alert = Object.assign({}, {
       show: false
     });
   },
-  [types.SHOW_MODAL]: (state, {type, card_id, card_id_list, code, share}) => {
+  [types.SHOW_MODAL]: (state, { type, card_id, card_id_list, code, share }) => {
     state.modal = Object.assign({}, {
-        show: true,
-        type,
-        card_id,
-        code,
-        share
-      });
+      show: true,
+      type,
+      card_id,
+      code,
+      share
+    });
     if (card_id_list) {
       state.modal.card_id_list = null;
       state.modal.card_id_list = [];
@@ -36,8 +36,8 @@ export default {
   },
   [types.SHOW_CONFIRM]: (state) => {
     state.confirm = Object.assign({}, {
-        show: true
-      });
+      show: true
+    });
   },
   [types.HIDE_CONFIRM]: (state) => {
     state.confirm = Object.assign({}, {

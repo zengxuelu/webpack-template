@@ -1,4 +1,5 @@
 const path = require('path');
+const WebpackMildCompile = require('webpack-mild-compile').Plugin;
 const publicPathMap = {
   pre: '/adminTest/',
   production: '/survey/admin/',
@@ -14,7 +15,10 @@ module.exports = {
       alias: {
         '~': path.join(__dirname, 'src')
       }
-    }
+    },
+    plugins: [
+      new WebpackMildCompile()
+    ]
   },
   chainWebpack: config => {
     config

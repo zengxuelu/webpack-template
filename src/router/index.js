@@ -5,7 +5,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history',
-  scrollBehavior: () => ({y: 0}),
+  scrollBehavior: () => ({ y: 0 }),
   routes: [
     {
       path: '/base',
@@ -32,6 +32,5 @@ router.beforeEach((to, from, next) => {
 //     to.query = { openid, sceneId}
 //   }
 // })
-
 
 export default router;

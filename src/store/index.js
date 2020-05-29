@@ -12,7 +12,6 @@ import createLogger from 'vuex/dist/logger';
 
 // const questions = require('./question.js');
 
-
 Vue.use(Vuex);
 
 const debug = process.env.VUE_APP_ENV !== 'development';
